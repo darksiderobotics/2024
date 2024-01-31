@@ -16,17 +16,17 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
-//import frc.robot.Constants.OIConstants;
+import frc.robot.commands.GyroResetCmd;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.SwerveSubsystem;
-import edu.wpi.first.wpilibj.event.EventLoop;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class RobotContainer {
 
     private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
-    private final XboxController controller = new XboxController(0);
+    private final CommandXboxController controller = new CommandXboxController(0);
+    //private final XboxController controller = new XboxController(0);
     //private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
 
     /*
@@ -47,15 +47,17 @@ public class RobotContainer {
                 () -> -controller.getLeftY(),
                 () -> controller.getLeftX(),
                 () -> controller.getRightX(),
-                () -> !controller.getAButton()));
+                () -> !controller.a().getAsBoolean()));
 
         configureButtonBindings();
     }
     private void configureButtonBindings() {
+        //() -> swerveSubsystem.zeroHeading()
+        controller.back().onTrue(new GyroResetCmd(swerveSubsystem));
         //new JoystickButton(driverJoytick, 2).onTrue(() -> swerveSubsystem.zeroHeading());
-        EventLoop GyroReset = new EventLoop();
-        GyroReset.bind(swerveSubsystem.zeroHeading());
-        controller.back(GyroReset);
+        //EventLoop GyroReset = new EventLoop();
+        //GyroReset.bind(swerveSubsystem.zeroHeading());
+        //controller.back(GyroReset);
     }
 
     public Command getAutonomousCommand() {

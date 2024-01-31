@@ -11,7 +11,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
-import frc.robot.commands.SwerveGyroRun;
+//import frc.robot.commands.SwerveGyroRun;
 
 public class SwerveSubsystem extends SubsystemBase {
     private final SwerveModule frontLeft = new SwerveModule(
@@ -69,11 +69,8 @@ public class SwerveSubsystem extends SubsystemBase {
         }).start();
     }
 
-    public Runnable zeroHeading() {
-        //gyro.reset();
-        SwerveGyroRun GyroReset = new SwerveGyroRun();
-       // GyroReset.run();
-        return GyroReset;
+    public void zeroHeading() {
+        gyro.reset();
     }
 
     public double getHeading() {
@@ -97,6 +94,12 @@ public class SwerveSubsystem extends SubsystemBase {
         odometer.update(getRotation2d(), modulePositions);
         SmartDashboard.putNumber("Robot Heading", getHeading());
         SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
+        double[] turningEncoderOffsets = new double[4];
+        turningEncoderOffsets[0] = frontLeft.getAbsoluteEncoderRad();
+        turningEncoderOffsets[1] = backLeft.getAbsoluteEncoderRad();
+        turningEncoderOffsets[2] = backRight.getAbsoluteEncoderRad();
+        turningEncoderOffsets[3] = frontRight.getAbsoluteEncoderRad();
+        SmartDashboard.putNumberArray("Encoder Offsets", turningEncoderOffsets);
     }
 
     public void stopModules() {
