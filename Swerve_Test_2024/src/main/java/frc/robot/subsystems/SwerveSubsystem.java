@@ -54,8 +54,8 @@ public class SwerveSubsystem extends SubsystemBase {
             SwerveModulePosition[] modulePositions = {
                 new SwerveModulePosition(frontLeft.getDrivePosition(), new Rotation2d(frontLeft.getTurningPosition())),
                 new SwerveModulePosition(frontRight.getDrivePosition(), new Rotation2d(frontRight.getTurningPosition())),
-                new SwerveModulePosition(backLeft.getDrivePosition(), new Rotation2d(backLeft.getTurningPosition())),
-                new SwerveModulePosition(backRight.getDrivePosition(), new Rotation2d(backRight.getTurningPosition()))};
+                new SwerveModulePosition(backRight.getDrivePosition(), new Rotation2d(backRight.getTurningPosition())),
+                new SwerveModulePosition(backLeft.getDrivePosition(), new Rotation2d(backLeft.getTurningPosition()))};
     private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
             new Rotation2d(0), modulePositions);
 
@@ -98,12 +98,6 @@ public class SwerveSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Back Left", backLeft.getAbsoluteEncoderRad());
         SmartDashboard.putNumber("Front Right", frontRight.getAbsoluteEncoderRad());
         SmartDashboard.putNumber("Back Right", backRight.getAbsoluteEncoderRad());
-        double[] turningEncoderOffsets = new double[4];
-        turningEncoderOffsets[0] = frontLeft.getAbsoluteEncoderRad();
-        turningEncoderOffsets[1] = backLeft.getAbsoluteEncoderRad();
-        turningEncoderOffsets[2] = backRight.getAbsoluteEncoderRad();
-        turningEncoderOffsets[3] = frontRight.getAbsoluteEncoderRad();
-        SmartDashboard.putNumberArray("Encoder Offsets", turningEncoderOffsets);
     }
 
     public void stopModules() {
