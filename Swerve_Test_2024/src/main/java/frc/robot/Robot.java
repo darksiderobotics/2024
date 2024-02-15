@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
+    private Command m_colorCheckerCommand;
 
     private RobotContainer m_robotContainer;
 
@@ -56,6 +57,8 @@ public class Robot extends TimedRobot {
         // robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+        m_colorCheckerCommand = m_robotContainer.startColorSensor();
+        m_colorCheckerCommand.schedule();
     }
 
     /** This function is called once each time the robot enters Disabled mode. */

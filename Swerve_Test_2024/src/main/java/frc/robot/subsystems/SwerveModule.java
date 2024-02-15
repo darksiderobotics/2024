@@ -3,8 +3,9 @@ package frc.robot.subsystems;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.RobotController;
+//import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogEncoder;
+//import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -22,7 +23,7 @@ public class SwerveModule {
 
     private final PIDController turningPidController;
 
-    private final AnalogInput absoluteEncoder;
+    private final AnalogEncoder absoluteEncoder;
     private final boolean absoluteEncoderReversed;
     private final double absoluteEncoderOffsetRad;
 
@@ -31,7 +32,7 @@ public class SwerveModule {
 
         this.absoluteEncoderOffsetRad = absoluteEncoderOffset;
         this.absoluteEncoderReversed = absoluteEncoderReversed;
-        absoluteEncoder = new AnalogInput(absoluteEncoderId);
+        absoluteEncoder = new AnalogEncoder(absoluteEncoderId);
 
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
@@ -70,9 +71,11 @@ public class SwerveModule {
     }
 
     public double getAbsoluteEncoderRad() {
-        double angle = absoluteEncoder.getVoltage() / RobotController.getVoltage5V();
+        double angle = absoluteEncoder.getAbsolutePosition();
+        //double angle = absoluteEncoder.getVoltage() / RobotController.getVoltage5V();
         angle *= 2.0 * Math.PI;
         angle -= absoluteEncoderOffsetRad;
+        SmartDashboard.putNumber("Angle" + absoluteEncoder.getChannel(), angle);
         return angle * (absoluteEncoderReversed ? -1.0 : 1.0);
     }
 

@@ -4,6 +4,8 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+//import edu.wpi.first.wpilibj.I2C;
+//import edu.wpi.first.wpilibj.I2C.Port;
 
 public final class Constants {
 
@@ -30,8 +32,8 @@ public final class Constants {
                 new Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
                 new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
 
-        public static final int kFrontLeftDriveMotorPort = 0;
-        public static final int kBackLeftDriveMotorPort = 8;
+        public static final int kFrontLeftDriveMotorPort = 10;
+        public static final int kBackLeftDriveMotorPort = 3;
         public static final int kFrontRightDriveMotorPort = 4;
         public static final int kBackRightDriveMotorPort = 5;
 
@@ -47,8 +49,8 @@ public final class Constants {
 
         public static final boolean kFrontLeftDriveEncoderReversed = true;
         public static final boolean kBackLeftDriveEncoderReversed = true;
-        public static final boolean kFrontRightDriveEncoderReversed = false;
-        public static final boolean kBackRightDriveEncoderReversed = false;
+        public static final boolean kFrontRightDriveEncoderReversed = true;
+        public static final boolean kBackRightDriveEncoderReversed = true;
 
         public static final int kFrontLeftDriveAbsoluteEncoderPort = 0;
         public static final int kBackLeftDriveAbsoluteEncoderPort = 3;
@@ -60,10 +62,10 @@ public final class Constants {
         public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
         public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
 
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -1;
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -1.5;
-        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -1.5;
-        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -1.5;
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = 4.779;
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 0.443;
+        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 2.999;
+        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 0.548;
 
         public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
@@ -100,5 +102,17 @@ public final class Constants {
         public static final int kDriverFieldOrientedButtonIdx = 1;
 
         public static final double kDeadband = 0.05;
+    }
+
+    public static final class NoteConstants{
+        public static final int IntakeMotorID = 8;
+        public static final int SharedMotorID = 1337;
+
+        public static final int Red_Low = 0;
+        public static final int Red_High = 0;
+        public static final int Green_Low = 0;
+        public static final int Green_High = 0;
+        public static final int Blue_Low = 0;
+        public static final int Blue_High = 0;
     }
 }

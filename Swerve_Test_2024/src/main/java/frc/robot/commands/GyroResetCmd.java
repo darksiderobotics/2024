@@ -17,7 +17,8 @@ public class GyroResetCmd extends Command {
 
     @Override
     public void execute() {
-        swerveSubsystem.zeroHeading();;
+        swerveSubsystem.zeroHeading();
+        end(true);
     }
     
     @Override
@@ -27,6 +28,6 @@ public class GyroResetCmd extends Command {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 }
