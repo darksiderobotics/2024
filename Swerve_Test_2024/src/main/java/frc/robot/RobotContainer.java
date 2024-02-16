@@ -10,7 +10,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RepeatCommand;
@@ -18,10 +17,13 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.commands.Fire;
 import frc.robot.commands.GyroResetCmd;
+import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.IntakeReading;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
@@ -29,6 +31,7 @@ public class RobotContainer {
 
     private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
     private final IntakeSubsystem Intake = new IntakeSubsystem();
+    private final ShooterSubsystem Shooter = new ShooterSubsystem();
 
     private final CommandXboxController controller = new CommandXboxController(0);
     //private final XboxController controller = new XboxController(0);
@@ -54,21 +57,18 @@ public class RobotContainer {
                 () -> controller.getRightX(),
                 () -> !controller.a().getAsBoolean()));
 
-        SmartDashboard.putString("Color Sensor: ", "1 Intake Instance Created");
         configureButtonBindings();
     }
     private void configureButtonBindings() {
         //() -> swerveSubsystem.zeroHeading()
         controller.back().onTrue(new GyroResetCmd(swerveSubsystem));
-        //new JoystickButton(driverJoytick, 2).onTrue(() -> swerveSubsystem.zeroHeading());
-        //EventLoop GyroReset = new EventLoop();
-        //GyroReset.bind(swerveSubsystem.zeroHeading());
-        //controller.back(GyroReset);
+        controller.rightTrigger(0.5).onTrue(new Fire(Shooter, "Speaker"));
+        controller.leftTrigger(0.5).onTrue(new Fire(Shooter, "Amp"));
+        controller.rightBumper().onTrue(new IntakeCmd(Intake));
     }
 
     public Command startColorSensor(){
         IntakeReading ColorCheck = new IntakeReading(Intake);
-        SmartDashboard.putString("Color Sensor: ", "3 Color Check Created");
         RepeatCommand ColorCheckCMD = new RepeatCommand(ColorCheck);
         return ColorCheckCMD;
     }

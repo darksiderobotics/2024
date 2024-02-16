@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.NoteConstants;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -26,6 +27,13 @@ public class IntakeSubsystem extends SubsystemBase{
         int red = IntakeColorSensor.getRed();
         int green = IntakeColorSensor.getGreen();
         int blue = IntakeColorSensor.getBlue();
+        Color color = IntakeColorSensor.getColor();
+        if( color == Color.kOrange || color == Color.kOrangeRed){
+            SmartDashboard.putString("Detected: ", "Note Found");
+        }
+        else{
+            SmartDashboard.putString("Detected: ", "Nothing for now");
+        }
         if (1300 > red && red > 1100 && 1050>green && green>850 && 400>blue && blue>250 ) {
             //Run the intake motors for 3 seconds
             runIntake();

@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class IntakeReading extends Command {
+public class IntakeCmd extends Command {
 
     public IntakeSubsystem intake;
     
-    public IntakeReading(IntakeSubsystem intake){
+    public IntakeCmd(IntakeSubsystem intake){
         this.intake = intake;
     }
 
@@ -17,7 +17,7 @@ public class IntakeReading extends Command {
 
     @Override
     public void execute() {
-        intake.getColors();
+        intake.runIntake();
         try {
             wait(2000);
         } catch (Exception e) {
@@ -33,6 +33,6 @@ public class IntakeReading extends Command {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 }
