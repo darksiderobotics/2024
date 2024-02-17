@@ -107,7 +107,8 @@ public final class Constants {
     public static final class NoteConstants{
         public static final int IntakeMotorID = 8;
         public static final int SharedMotorID = 1337;
-        public static final int ShooterMotorID = 1337;
+        public static final int RShooterMotorID = 1337;
+        public static final int LShooterMotorID = 1337;
 
         public static final double SpeakerSpeed = 1.00;
         public static final double AmpSpeed = 0.5;

@@ -34,21 +34,6 @@ public class RobotContainer {
     private final ShooterSubsystem Shooter = new ShooterSubsystem();
 
     private final CommandXboxController controller = new CommandXboxController(0);
-    //private final XboxController controller = new XboxController(0);
-    //private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
-
-    /*
-    public RobotContainer() {
-        swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
-                swerveSubsystem,
-                () -> -driverJoytick.getRawAxis(OIConstants.kDriverYAxis),
-                () -> driverJoytick.getRawAxis(OIConstants.kDriverXAxis),
-                () -> driverJoytick.getRawAxis(OIConstants.kDriverRotAxis),
-                () -> !driverJoytick.getRawButton(OIConstants.kDriverFieldOrientedButtonIdx)));
-
-        configureButtonBindings();
-    }
- */
     public RobotContainer() {
         swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
                 swerveSubsystem,

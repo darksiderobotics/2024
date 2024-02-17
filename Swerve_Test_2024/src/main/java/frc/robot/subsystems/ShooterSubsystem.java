@@ -11,8 +11,8 @@ public class ShooterSubsystem extends SubsystemBase{
     CANSparkMax SharedMotor;
 
     public ShooterSubsystem(){
-        RShooterMotor = new CANSparkMax(NoteConstants.ShooterMotorID, MotorType.kBrushless);
-        LShooterMotor = new CANSparkMax(NoteConstants.ShooterMotorID, MotorType.kBrushless);
+        RShooterMotor = new CANSparkMax(NoteConstants.RShooterMotorID, MotorType.kBrushless);
+        LShooterMotor = new CANSparkMax(NoteConstants.LShooterMotorID, MotorType.kBrushless);
         SharedMotor = new CANSparkMax(NoteConstants.SharedMotorID, MotorType.kBrushless);
     }
 
