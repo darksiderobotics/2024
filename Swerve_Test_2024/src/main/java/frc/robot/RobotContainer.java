@@ -22,7 +22,6 @@ import frc.robot.commands.GyroResetCmd;
 import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.IntakeReading;
 import frc.robot.commands.SwerveJoystickCmd;
-import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -30,7 +29,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 public class RobotContainer {
 
     private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
-    private final IntakeSubsystem Intake = new IntakeSubsystem();
     private final ShooterSubsystem Shooter = new ShooterSubsystem();
 
     private final CommandXboxController controller = new CommandXboxController(0);
@@ -49,11 +47,11 @@ public class RobotContainer {
         controller.back().onTrue(new GyroResetCmd(swerveSubsystem));
         controller.rightTrigger(0.5).onTrue(new Fire(Shooter, "Speaker"));
         controller.leftTrigger(0.5).onTrue(new Fire(Shooter, "Amp"));
-        controller.rightBumper().onTrue(new IntakeCmd(Intake));
+        controller.rightBumper().onTrue(new IntakeCmd(Shooter));
     }
 
     public Command startColorSensor(){
-        IntakeReading ColorCheck = new IntakeReading(Intake);
+        IntakeReading ColorCheck = new IntakeReading(Shooter);
         RepeatCommand ColorCheckCMD = new RepeatCommand(ColorCheck);
         return ColorCheckCMD;
     }
