@@ -1,7 +1,6 @@
 package frc.robot;
 
 import java.util.List;
-//import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -17,10 +16,10 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
-import frc.robot.commands.Fire;
-import frc.robot.commands.GyroResetCmd;
-import frc.robot.commands.IntakeCmd;
-import frc.robot.commands.IntakeReading;
+//import frc.robot.commands.Fire;
+//import frc.robot.commands.GyroResetCmd;
+//import frc.robot.commands.IntakeCmd;
+//import frc.robot.commands.IntakeReading;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -38,22 +37,31 @@ public class RobotContainer {
                 () -> -controller.getLeftY(),
                 () -> controller.getLeftX(),
                 () -> controller.getRightX(),
-                () -> !controller.a().getAsBoolean()));
+                () -> !controller.leftBumper().getAsBoolean()));
 
         configureButtonBindings();
+        startColorSensor();
     }
     private void configureButtonBindings() {
         //() -> swerveSubsystem.zeroHeading()
-        controller.back().onTrue(new GyroResetCmd(swerveSubsystem));
-        controller.rightTrigger(0.5).onTrue(new Fire(Shooter, "Speaker"));
-        controller.leftTrigger(0.5).onTrue(new Fire(Shooter, "Amp"));
-        controller.rightBumper().onTrue(new IntakeCmd(Shooter));
+        //controller.back().onTrue(new GyroResetCmd(swerveSubsystem));
+        controller.back().onTrue(new InstantCommand( () -> SwerveSubsystem.zeroHeading()));
+        //controller.rightTrigger(0.5).onTrue(new Fire(Shooter, "Speaker"));
+        controller.rightTrigger(0.2).onTrue(new InstantCommand( () -> ShooterSubsystem.ShootSpeaker()));
+        controller.rightTrigger(0.2).onFalse(new InstantCommand( () -> ShooterSubsystem.StopShooter()));
+        //controller.leftTrigger(0.5).onTrue(new Fire(Shooter, "Amp"));
+        controller.leftTrigger(0.2).onTrue(new InstantCommand( () -> ShooterSubsystem.ShootAmp()));
+        controller.leftTrigger(0.2).onFalse(new InstantCommand( () -> ShooterSubsystem.StopShooter()));
+        //controller.rightBumper().onTrue(new IntakeCmd(Shooter));
+        controller.rightBumper().onTrue(new InstantCommand( () -> ShooterSubsystem.runIntake()));
     }
 
-    public Command startColorSensor(){
-        IntakeReading ColorCheck = new IntakeReading(Shooter);
-        RepeatCommand ColorCheckCMD = new RepeatCommand(ColorCheck);
-        return ColorCheckCMD;
+    public void startColorSensor(){
+        //IntakeReading ColorCheck = new IntakeReading(Shooter);
+        //RepeatCommand ColorCheckCMD = new RepeatCommand(ColorCheck);
+        RepeatCommand ColorCheckCMD = new RepeatCommand( new InstantCommand( () -> ShooterSubsystem.getColors() ) );
+        ColorCheckCMD.schedule();
+        //return ColorCheckCMD;
     }
 
     public Command getAutonomousCommand() {

@@ -5,10 +5,10 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 public class GyroResetCmd extends Command {
 
-    static SwerveSubsystem swerveSubsystem;
+    public SwerveSubsystem swerveSubsystem;
     
-    public GyroResetCmd(SwerveSubsystem swerveSubsystem_in){
-        swerveSubsystem = swerveSubsystem_in;
+    public GyroResetCmd(SwerveSubsystem swerveSubsystem){
+        this.swerveSubsystem = swerveSubsystem;
     }
 
     @Override

@@ -1,14 +1,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class IntakeCmd extends Command {
 
-    public IntakeSubsystem intake;
+    public ShooterSubsystem shooter;
     
-    public IntakeCmd(IntakeSubsystem intake){
-        this.intake = intake;
+    public IntakeCmd(ShooterSubsystem shooter){
+        this.shooter = shooter;
     }
 
     @Override
@@ -17,7 +17,7 @@ public class IntakeCmd extends Command {
 
     @Override
     public void execute() {
-        intake.runIntake();
+        shooter.runIntake();
         try {
             wait(2000);
         } catch (Exception e) {
@@ -28,7 +28,7 @@ public class IntakeCmd extends Command {
     
     @Override
     public void end(boolean interrupted) {
-        intake.stopIntake();
+        shooter.stopIntake();
     }
 
     @Override

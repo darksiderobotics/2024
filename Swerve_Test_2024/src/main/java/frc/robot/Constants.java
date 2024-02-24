@@ -57,10 +57,10 @@ public final class Constants {
         public static final int kFrontRightDriveAbsoluteEncoderPort = 1;
         public static final int kBackRightDriveAbsoluteEncoderPort = 2;
 
-        public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
-        public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;
-        public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
-        public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
+        public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = true;
+        public static final boolean kBackLeftDriveAbsoluteEncoderReversed = true;
+        public static final boolean kFrontRightDriveAbsoluteEncoderReversed = true;
+        public static final boolean kBackRightDriveAbsoluteEncoderReversed = true;
 
         public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = 4.779;
         public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 0.443;
@@ -106,12 +106,21 @@ public final class Constants {
 
     public static final class NoteConstants{
         public static final int IntakeMotorID = 8;
-        public static final int SharedMotorID = 1337;
-        public static final int RShooterMotorID = 1337;
-        public static final int LShooterMotorID = 1337;
+        public static final int SharedMotorID = 11;
+        public static final int RShooterMotorID = 13;
+        public static final int LShooterMotorID = 12;
         
-        public static final double IntakeSpeed = 0.65;
+        public static final double IntakeSpeed = -0.85;
         public static final double SpeakerSpeed = 1.00;
         public static final double AmpSpeed = 0.5;
+        public static final double SharedMotorSpeed = 0.65;
+    }
+
+    public static final class ClimberConstants{
+        public static final int ClimberMotorID = 1337;
+        public static final int ClimberLowLimitID = 1337;
+        public static final int ClimberHighLimitID = 1337;
+        
+        public static final double ClimberSpeed = 1.00;
     }
 }

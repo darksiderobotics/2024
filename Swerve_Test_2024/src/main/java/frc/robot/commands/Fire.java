@@ -35,7 +35,7 @@ public class Fire extends Command{
     
     @Override
     public void end(boolean interrupted) {
-
+        Shooter.StopShooter();
     }
 
     @Override
